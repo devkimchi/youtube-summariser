@@ -1,0 +1,24 @@
+<div class="container">
+
+    <div class="row">
+        <div class="mb-3">
+            <label for="ytlink" class="form-label"><strong>YouTube Link</strong></label>
+            <input class="form-control" id="ytlink" placeholder="Add YouTube link here" @bind="YouTubeLinkUrl"></input>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="mb-3">
+            <button type="button" class="btn btn-primary" @onclick="CompleteAsync">Summarise!</button>
+            <button type="button" class="btn btn-secondary" @onclick="ClearAsync">Clear!</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="mb-3">
+            <label for="summary" class="form-label"><strong>Summary</strong></label>
+            <textarea class="form-control" id="summary" rows="10" placeholder="Result will show here" readonly>@Summary</textarea>
+        </div>
+    </div>
+
+</div>
