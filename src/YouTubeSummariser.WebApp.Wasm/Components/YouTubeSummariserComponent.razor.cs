@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-
+using Microsoft.JSInterop;
 using YouTubeSummariser.WebApp.Wasm.Services;
 
 namespace YouTubeSummariser.WebApp.Wasm.Components;
@@ -12,6 +12,12 @@ public partial class YouTubeSummariserComponent : ComponentBase
     /// </summary>
     [Inject]
     protected IOpenAIService? OpenAI { get; set; }
+
+    /// <summary>
+    /// Gets or sets the <see cref="IJSRuntime"/> instance.
+    /// </summary>
+    [Inject]
+    protected IJSRuntime Jsr { get; set; }
 
     /// <summary>
     /// Gets or sets the YouTube link URL.
@@ -28,7 +34,10 @@ public partial class YouTubeSummariserComponent : ComponentBase
     /// </summary>
     /// <param name="ev"><see cref="MouseEventArgs"/> instance.</param>
     protected async Task CompleteAsync(MouseEventArgs ev)
-        => this.Summary = await this.OpenAI.GetCompletionsAsync(this.YouTubeLinkUrl);
+    {
+        var caption = await this.Jsr.InvokeAsync<string>("YouTube.downloadYouTubeCaptions", this.YouTubeLinkUrl, "en");
+        this.Summary = await this.OpenAI.GetCompletionsAsync(caption);
+    }
 
     /// <summary>
     /// Handles the event when the "Clear!" button is clicked.

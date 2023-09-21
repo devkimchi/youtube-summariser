@@ -3,6 +3,9 @@
   <PropertyGroup>
     <AssemblyName>YouTubeSummariser.WebApp.Wasm</AssemblyName>
     <RootNamespace>YouTubeSummariser.WebApp.Wasm</RootNamespace>
+
+    <JsInteropRoot>JsInterop/</JsInteropRoot>
+    <DefaultItemExcludes>$(DefaultItemExcludes);$(JsInteropRoot)node_modules/**</DefaultItemExcludes>
   </PropertyGroup>
 
   <ItemGroup>
@@ -10,5 +13,17 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.11" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.11" PrivateAssets="all" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="$(JsInteropRoot)**" />
+    <None Remove="$(JsInteropRoot)**" />
+    <None Include="$(JsInteropRoot)**" Exclude="$(JsInteropRoot)node_modules/**" />
+  </ItemGroup>
+
+  <Target Name="PublishRunWebpack" AfterTargets="Build">
+    <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
+    <Exec WorkingDirectory="$(JsInteropRoot)" Command="npm install" />
+    <Exec WorkingDirectory="$(JsInteropRoot)" Command="npm run build" />
+  </Target>
 
 </Project>
