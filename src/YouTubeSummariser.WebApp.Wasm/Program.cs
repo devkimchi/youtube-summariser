@@ -1,3 +1,6 @@
+using Aliencube.YouTubeSubtitlesExtractor;
+using Aliencube.YouTubeSubtitlesExtractor.Abstractions;
+
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
@@ -24,6 +27,7 @@ var promptSettings = builder.Configuration
 builder.Services.AddSingleton(promptSettings);
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+builder.Services.AddScoped<IYouTubeVideo, YouTubeVideo>();
 builder.Services.AddScoped<IOpenAIService, OpenAIService>();
 
 await builder.Build().RunAsync();

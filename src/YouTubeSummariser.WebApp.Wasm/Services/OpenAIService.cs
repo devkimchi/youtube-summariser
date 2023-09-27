@@ -7,7 +7,7 @@ namespace YouTubeSummariser.WebApp.Wasm.Services;
 
 public interface IOpenAIService
 {
-    Task<string> GetCompletionsAsync(string prompt);
+    Task<string> GetCompletionsAsync(string prompt, string languageCode = "en");
 }
 
 public class OpenAIService : IOpenAIService
@@ -21,7 +21,7 @@ public class OpenAIService : IOpenAIService
         this._promptSettings = promptSettings ?? throw new ArgumentNullException(nameof(promptSettings));
     }
 
-    public async Task<string> GetCompletionsAsync(string prompt)
+    public async Task<string> GetCompletionsAsync(string prompt, string languageCode = "en")
     {
         var endpoint = new Uri(this._openAISettings.Endpoint);
         var credential = new AzureKeyCredential(this._openAISettings.ApiKey);
@@ -32,7 +32,8 @@ public class OpenAIService : IOpenAIService
             Messages =
                 {
                     new ChatMessage(ChatRole.System, this._promptSettings.System),
-                    new ChatMessage(ChatRole.User, prompt)
+                    new ChatMessage(ChatRole.System, $"Here's the transcript in the given language code of \"{languageCode}\"."),
+                    new ChatMessage(ChatRole.User, prompt),
                 },
             MaxTokens = this._promptSettings.MaxTokens,
             Temperature = this._promptSettings.Temperature,

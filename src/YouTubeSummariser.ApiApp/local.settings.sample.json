@@ -1,0 +1,15 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+
+    "OpenAI__Endpoint": "{{AOAI_ENDPOINT_URL}}",
+    "OpenAI__ApiKey": "{{AOAI_API_KEY}}",
+    "OpenAI__DeploymentId": "{{AOAI_DEPLOYMENT_ID}}",
+
+    "Prompt__System": "You are the expert of summarising long contents. You are going to summarise the following YouTube video transcript in a given language code.",
+    "Prompt__MaxTokens": 3000,
+    "Prompt__Temperature": 0.7
+  }
+}
