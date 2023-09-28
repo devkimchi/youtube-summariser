@@ -1,21 +1,21 @@
 {
   "name": "jsinterop",
   "version": "1.0.0",
-  "description": "Extract YouTube video subtitles",
+  "description": "YouTube Summariser - JS Interop",
   "main": "index.js",
   "author": "justinyoo",
   "license": "MIT",
   "scripts": {
-    "func": "run-func src/index.js downloadYouTubeCaptions 'https://www.youtube.com/watch?v=ten2CODn_og'",
     "build": "webpack --mode production"
   },
   "dependencies": {
-    "youtube-caption-extractor": "^1.4.3"
+    "@fluentui/react": "^8.111.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.22.20",
+    "@babel/core": "^7.23.0",
     "babel-loader": "^9.1.3",
-    "run-func": "^3.0.0",
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4"
   }

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using Microsoft.JSInterop;
 
 using YouTubeSummariser.WebApp.Wasm.Facade;
 
@@ -12,6 +13,9 @@ public partial class YouTubeSummariserComponent : ComponentBase
     /// </summary>
     [Inject]
     protected YouTubeSummariserClient YouTube { get; set; }
+
+    [Inject]
+    protected IJSRuntime JSR { get; set; }
 
     /// <summary>
     /// Gets or sets the YouTube link URL.
@@ -29,6 +33,11 @@ public partial class YouTubeSummariserComponent : ComponentBase
     protected string? SummaryLanguageCode { get; set; } = "en";
 
     /// <summary>
+    /// Gets or sets a value indicating whether the summary has been completed or not.
+    /// </summary>
+    protected bool SummaryCompleted { get; set; }
+
+    /// <summary>
     /// Gets or sets the summary.
     /// </summary>
     protected string? Summary { get; set; }
@@ -43,6 +52,10 @@ public partial class YouTubeSummariserComponent : ComponentBase
         {
             return;
         }
+
+        this.Summary = default;
+        this.SummaryCompleted = false;
+        await this.JSR.InvokeVoidAsync("YouTube.RenderProgressBar");
 
         var request = new SummariseRequestModel
         {
@@ -63,6 +76,7 @@ public partial class YouTubeSummariserComponent : ComponentBase
         }
 
         this.Summary = response;
+        this.SummaryCompleted = true;
     }
 
     /// <summary>
