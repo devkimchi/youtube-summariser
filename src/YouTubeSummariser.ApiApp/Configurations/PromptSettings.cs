@@ -1,4 +1,4 @@
-namespace YouTubeSummariser.WebApp.Wasm.Configurations;
+namespace YouTubeSummariser.ApiApp.Configurations;
 
 /// <summary>
 /// This represents the settings entity for the prompt.
@@ -13,15 +13,15 @@ public class PromptSettings
     /// <summary>
     /// Gets or sets the system prompt.
     /// </summary>
-    public virtual string? System { get; set; } = "You are the expert of summarising long contents. You are going to summarise the following YouTube video transcript in 5 bullet point items.";
+    public virtual string? System { get; set; }
 
     /// <summary>
     /// Gets or sets the maximum number of tokens to use for completion.
     /// </summary>
-    public virtual int? MaxTokens { get; set; } = 3000;
+    public virtual int? MaxTokens { get; set; }
 
     /// <summary>
     /// Gets or sets the temperature of the completion.
     /// </summary>
-    public virtual float? Temperature { get; set; } = 0.7f;
+    public virtual float? Temperature { get; set; }
 }

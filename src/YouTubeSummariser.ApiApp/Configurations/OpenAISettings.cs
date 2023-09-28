@@ -1,4 +1,4 @@
-namespace YouTubeSummariser.WebApp.Wasm.Configurations;
+namespace YouTubeSummariser.ApiApp.Configurations;
 
 /// <summary>
 /// This represents the settings entity for the OpenAI API.
