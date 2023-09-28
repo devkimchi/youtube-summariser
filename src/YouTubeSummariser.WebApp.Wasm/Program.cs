@@ -1,8 +1,9 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
+using YouTubeSummariser.Components;
+using YouTubeSummariser.Components.Facade;
 using YouTubeSummariser.WebApp.Wasm;
-using YouTubeSummariser.WebApp.Wasm.Facade;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -25,5 +26,7 @@ builder.Services.AddScoped(sp =>
 
     return facade;
 });
+
+//builder.Services.AddScoped<IProgressBarJsInterop, ProgressBarJsInterop>();
 
 await builder.Build().RunAsync();
