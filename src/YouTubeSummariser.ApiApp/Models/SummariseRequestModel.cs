@@ -11,7 +11,12 @@ public class SummariseRequestModel
     public string? VideoUrl { get; set; }
 
     /// <summary>
-    /// Gets or sets the language code.
+    /// Gets or sets the video language code.
     /// </summary>
-    public string? LanguageCode { get; set; }
+    public string? VideoLanguageCode { get; set; }
+
+    /// <summary>
+    /// Gets or sets the summary language code.
+    /// </summary>
+    public string? SummaryLanguageCode { get; set; }
 }

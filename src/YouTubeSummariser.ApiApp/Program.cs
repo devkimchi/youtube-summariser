@@ -4,15 +4,21 @@ using Aliencube.YouTubeSubtitlesExtractor;
 using Azure;
 using Azure.AI.OpenAI;
 
+using Microsoft.Azure.Functions.Worker.Extensions.OpenApi.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 using YouTubeSummariser.ApiApp.Configurations;
 using YouTubeSummariser.ApiApp.Services;
+using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions;
+using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations;
+using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums;
+using Microsoft.OpenApi.Models;
 
 var host = new HostBuilder()
-    .ConfigureFunctionsWorkerDefaults()
+    .ConfigureFunctionsWorkerDefaults(worker => worker.UseNewtonsoftJson())
+    //.ConfigureFunctionsWorkerDefaults()
     .ConfigureHostConfiguration(config => config.AddEnvironmentVariables())
     .ConfigureServices(services =>
     {
@@ -37,6 +43,27 @@ var host = new HostBuilder()
         services.AddScoped<IYouTubeVideo, YouTubeVideo>();
         services.AddScoped<IYouTubeService, YouTubeService>();
         services.AddScoped<IOpenAIService, OpenAIService>();
+
+        services.AddSingleton<IOpenApiConfigurationOptions>(_ =>
+        {
+            var options = new OpenApiConfigurationOptions()
+            {
+                OpenApiVersion = OpenApiVersionType.V3,
+                Info = new OpenApiInfo()
+                {
+                    Version = DefaultOpenApiConfigurationOptions.GetOpenApiDocVersion(),
+                    Title = DefaultOpenApiConfigurationOptions.GetOpenApiDocTitle(),
+                    Description = DefaultOpenApiConfigurationOptions.GetOpenApiDocDescription(),
+                    License = new OpenApiLicense()
+                    {
+                        Name = "MIT",
+                        Url = new Uri("http://opensource.org/licenses/MIT"),
+                    }
+                },
+            };
+
+            return options;
+        });
     })
 
     .Build();

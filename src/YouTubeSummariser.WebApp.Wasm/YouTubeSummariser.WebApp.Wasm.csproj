@@ -9,16 +9,29 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Aliencube.YouTubeSubtitlesExtractor" Version="1.0.1" />
-    <PackageReference Include="Azure.AI.OpenAI" Version="1.0.0-beta.8" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.11" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.11" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="7.0.11">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="NSwag.ApiDescription.Client" Version="13.20.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
     <Content Remove="$(JsInteropRoot)**" />
     <None Remove="$(JsInteropRoot)**" />
     <None Include="$(JsInteropRoot)**" Exclude="$(JsInteropRoot)node_modules/**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <OpenApiReference Include="OpenAPIs\v3.yaml" CodeGenerator="NSwagCSharp" Namespace="YouTubeSummariser.WebApp.Wasm.Facade" ClassName="YouTubeSummariserClient">
+      <SourceUri>http://localhost:7071/api/openapi/v3.yaml</SourceUri>
+    </OpenApiReference>
   </ItemGroup>
 
   <Target Name="PublishRunWebpack" AfterTargets="Build">

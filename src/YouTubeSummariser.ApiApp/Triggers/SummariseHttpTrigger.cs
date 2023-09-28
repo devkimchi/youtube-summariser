@@ -1,8 +1,12 @@
 using System.Net;
+using System.Net.Mime;
 
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
+using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
+using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 
 using YouTubeSummariser.ApiApp.Models;
 using YouTubeSummariser.ApiApp.Services;
@@ -37,6 +41,12 @@ public class SummariseHttpTrigger
     /// <param name="req"><see cref="HttpRequestData"/> instance.</param>
     /// <returns>Returns the YouTube video summary.</returns>
     [Function(nameof(SummariseAsync))]
+    [OpenApiOperation(operationId: "summarise", tags: new[] { "summary" }, Summary = "Gets the summary from YouTube video", Description = "This gets the summary from a YouTube video.", Visibility = OpenApiVisibilityType.Important)]
+    [OpenApiSecurity(schemeName: "function_key", schemeType: SecuritySchemeType.ApiKey, Name = "x-functions-key", In = OpenApiSecurityLocationType.Header)]
+    [OpenApiRequestBody(contentType: MediaTypeNames.Application.Json, bodyType: typeof(SummariseRequestModel), Required = true, Description = "The YouTube video information.")]
+    [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: MediaTypeNames.Text.Plain, bodyType: typeof(string), Summary = "The YouTube video summary.")]
+    [OpenApiResponseWithoutBody(statusCode: HttpStatusCode.BadRequest, Summary = "Invalid request.", Description = "This indicates the request is invalid.")]
+    [OpenApiResponseWithoutBody(statusCode: HttpStatusCode.InternalServerError, Summary = "Internal server error.", Description = "This indicates the server is not working as expected.")]
     public async Task<HttpResponseData> SummariseAsync([HttpTrigger(AuthorizationLevel.Function, "POST", Route = "summarise")] HttpRequestData req)
     {
         this._logger.LogInformation("C# HTTP trigger function processed a request.");
@@ -57,15 +67,19 @@ public class SummariseHttpTrigger
             response = req.CreateResponse(HttpStatusCode.BadRequest);
             return response;
         }
-        if (string.IsNullOrWhiteSpace(payload.LanguageCode) == true)
+        if (string.IsNullOrWhiteSpace(payload.VideoLanguageCode) == true)
         {
-            payload.LanguageCode = "en";
+            payload.VideoLanguageCode = "en";
+        }
+        if (string.IsNullOrWhiteSpace(payload.SummaryLanguageCode) == true)
+        {
+            payload.SummaryLanguageCode = payload.VideoLanguageCode;
         }
 
         try
         {
-            var transcript = await this._youtube.GetTranscriptAsync(payload.VideoUrl, payload.LanguageCode);
-            var completion = await this._openai.GetCompletionsAsync(transcript, payload.LanguageCode);
+            var transcript = await this._youtube.GetTranscriptAsync(payload.VideoUrl, payload.VideoLanguageCode);
+            var completion = await this._openai.GetCompletionsAsync(transcript, payload.SummaryLanguageCode);
 
             response = req.CreateResponse(HttpStatusCode.OK);
             response.Headers.Add("Content-Type", "text/plain; charset=utf-8");

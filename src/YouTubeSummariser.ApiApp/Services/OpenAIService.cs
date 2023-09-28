@@ -48,8 +48,7 @@ public class OpenAIService : IOpenAIService
             Messages =
                 {
                     new ChatMessage(ChatRole.System, this._promptSettings.System),
-                    new ChatMessage(ChatRole.System, $"Here's the transcript in the given language code of \"{languageCode}\"."),
-                    new ChatMessage(ChatRole.System, $"Summarise it in 5 bullet point items in the given language code of \"{languageCode}\"."),
+                    new ChatMessage(ChatRole.System, $"Here's the transcript. Summarise it in 5 bullet point items in the given language code of \"{languageCode}\"."),
                     new ChatMessage(ChatRole.User, prompt),
                 },
             MaxTokens = this._promptSettings.MaxTokens,
@@ -61,7 +60,9 @@ public class OpenAIService : IOpenAIService
         var completion = default(string);
         try
         {
-            var result = await _openai.GetChatCompletionsAsync(deploymentId, chatCompletionsOptions);
+            var result = await this._openai
+                                   .GetChatCompletionsAsync(deploymentId, chatCompletionsOptions)
+                                   .ConfigureAwait(false);
             completion = result.Value.Choices[0].Message.Content;
         }
         catch

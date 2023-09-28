@@ -35,7 +35,9 @@ public class YouTubeService : IYouTubeService
     /// <inheritdoc/>
     public async Task<string> GetTranscriptAsync(string videoUrl, string languageCode = "en")
     {
-        var subtitle = await this._youtube.ExtractSubtitleAsync(videoUrl, languageCode).ConfigureAwait(false);
+        var subtitle = await this._youtube
+                                 .ExtractSubtitleAsync(videoUrl, languageCode)
+                                 .ConfigureAwait(false);
         var transcript = subtitle.Content
                                  .Select(p => p.Text)
                                  .Aggregate((a, b) => $"{a}\n{b}");
