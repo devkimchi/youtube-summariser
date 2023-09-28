@@ -2,9 +2,9 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 
-using YouTubeSummariser.WebApp.Wasm.Facade;
+using YouTubeSummariser.Components.Facade;
 
-namespace YouTubeSummariser.WebApp.Wasm.Components;
+namespace YouTubeSummariser.Components;
 
 public partial class YouTubeSummariserComponent : ComponentBase
 {
@@ -16,6 +16,9 @@ public partial class YouTubeSummariserComponent : ComponentBase
 
     [Inject]
     protected IJSRuntime JSR { get; set; }
+
+    //[Inject]
+    //protected IProgressBarJsInterop ProgressBar { get; set; }
 
     /// <summary>
     /// Gets or sets the YouTube link URL.
@@ -56,6 +59,7 @@ public partial class YouTubeSummariserComponent : ComponentBase
         this.Summary = default;
         this.SummaryCompleted = false;
         await this.JSR.InvokeVoidAsync("YouTube.RenderProgressBar");
+        //await this.ProgressBar.RenderAsync();
 
         var request = new SummariseRequestModel
         {
