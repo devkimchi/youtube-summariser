@@ -1,0 +1,5 @@
+- name: 'gpt-35-turbo-16k'
+  deploymentName: 'model-gpt35turbo16k'
+  version: '0613'
+  skuName: 'Standard'
+  skuCapacity: 16

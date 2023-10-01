@@ -1,0 +1,17 @@
+<policies>
+  <inbound>
+    <base />
+    <set-header name="x-functions-key" exists-action="override">
+      <value>{{X_FUNCTIONS_KEY_AOAI}}</value>
+    </set-header>
+  </inbound>
+  <backend>
+    <base />
+  </backend>
+  <outbound>
+    <base />
+  </outbound>
+  <on-error>
+    <base />
+  </on-error>
+</policies>

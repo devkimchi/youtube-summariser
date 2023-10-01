@@ -1,0 +1,6 @@
+- name: 'OpenApi__DocVersion'
+  value: '1.0.0'
+- name: 'OpenApi__DocTitle'
+  value: 'YouTube Summariser API'
+- name: 'OpenApi__DocDescription'
+  value: 'This is a set of APIs that summarises YouTube video content.'
