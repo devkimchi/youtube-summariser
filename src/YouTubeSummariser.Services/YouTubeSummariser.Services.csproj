@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+
+    <AssemblyName>YouTubeSummariser.Services</AssemblyName>
+    <RootNamespace>YouTubeSummariser.Services</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aliencube.YouTubeSubtitlesExtractor" Version="1.0.2" />
+    <PackageReference Include="Azure.AI.OpenAI" Version="1.0.0-beta.8" />
+  </ItemGroup>
+
+</Project>

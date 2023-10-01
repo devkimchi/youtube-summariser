@@ -8,13 +8,13 @@ using Microsoft.Azure.Functions.Worker.Extensions.OpenApi.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
-using YouTubeSummariser.ApiApp.Configurations;
-using YouTubeSummariser.ApiApp.Services;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums;
 using Microsoft.OpenApi.Models;
+
+using YouTubeSummariser.Services;
+using YouTubeSummariser.Services.Configurations;
 
 var host = new HostBuilder()
     .ConfigureFunctionsWorkerDefaults(worker => worker.UseNewtonsoftJson())
