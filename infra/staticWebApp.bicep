@@ -54,14 +54,14 @@ resource sttappSettings 'Microsoft.Web/staticSites/config@2022-03-01' = {
   }
 }
 
-resource sttappLinkedBackend 'Microsoft.Web/staticSites/linkedBackends@2022-03-01' = {
-  name: 'facade'
-  parent: sttapp
-  properties: {
-    backendResourceId: staticApp.linkedBackend.id
-    region: staticApp.linkedBackend.location
-  }
-}
+// resource sttappLinkedBackend 'Microsoft.Web/staticSites/linkedBackends@2022-03-01' = {
+//   name: 'facade'
+//   parent: sttapp
+//   properties: {
+//     backendResourceId: staticApp.linkedBackend.id
+//     region: staticApp.linkedBackend.location
+//   }
+// }
 
 output id string = sttapp.id
 output name string = sttapp.name

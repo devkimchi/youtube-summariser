@@ -97,19 +97,19 @@ module fncapps './provision-FunctionApp.bicep' = [for (app, index) in apps: if (
   }
 }]
 
-module sttapp './provision-staticWebApp.bicep' = {
-  name: 'StaticWebApp'
-  scope: rg
-  dependsOn: [
-    apim
-    fncapps
-  ]
-  params: {
-    name: name
-    location: 'eastasia'
-    tags: tags
-  }
-}
+// module sttapp './provision-staticWebApp.bicep' = {
+//   name: 'StaticWebApp'
+//   scope: rg
+//   dependsOn: [
+//     apim
+//     fncapps
+//   ]
+//   params: {
+//     name: name
+//     location: 'eastasia'
+//     tags: tags
+//   }
+// }
 
 module apis './provision-ApiManagementApi.bicep' = [for (app, index) in apps: if (app.apimIntegrated == true) {
   name: 'ApiManagementApi_${app.name}'
