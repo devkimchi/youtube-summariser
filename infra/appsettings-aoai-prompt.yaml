@@ -1,0 +1,6 @@
+- name: 'Prompt__System'
+  value: 'You are the expert of summarising long contents. You are going to summarise the following YouTube video transcript in a given language code.'
+- name: 'Prompt__MaxTokens'
+  value: 3000
+- name: 'Prompt__Temperature'
+  value: 0.7
