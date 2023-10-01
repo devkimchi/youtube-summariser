@@ -1,0 +1,155 @@
+name: 'Azure Dev'
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+    - main
+    - 'feature/*'
+  pull_request:
+    branches:
+    - main
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  AZURE_RESOURCE_GROUP_NAME: 'rg-${{ vars.AZURE_ENV_NAME }}'
+  AZURE_FNCAPP_NAME: 'fncapp-${{ vars.AZURE_ENV_NAME }}'
+  AZURE_APIM_NAME: 'apim-${{ vars.AZURE_ENV_NAME }}'
+  # AZURE_STTAPP_NAME: 'sttapp-${{ vars.AZURE_ENV_NAME }}'
+  AZURE_OPENAI_NAME: 'aoai-${{ vars.AZURE_ENV_NAME }}'
+
+jobs:
+  build-test:
+    name: Build Test
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 7.x
+
+    - name: Restore NuGet packages
+      shell: bash
+      run: |
+        dotnet restore
+
+    - name: Build solution
+      shell: bash
+      run: |
+        dotnet build -c Release
+
+    - name: Test solution
+      shell: bash
+      run: |
+        dotnet test -c Release
+
+    - name: Create artifacts
+      if: (github.event_name == 'push' && github.ref == 'refs/heads/main') || github.event_name == 'workflow_dispatch'
+      shell: bash
+      run: |
+        dotnet publish -c Release
+
+    - name: Upload artifact - API
+      if: (github.event_name == 'push' && github.ref == 'refs/heads/main') || github.event_name == 'workflow_dispatch'
+      uses: actions/upload-artifact@v3
+      with:
+        name: apiapp
+        path: src/YouTubeSummariser.ApiApp/bin/Release/net7.0/publish
+
+  deploy:
+    name: Deploy
+    if: (github.event_name == 'push' && github.ref == 'refs/heads/main') || github.event_name == 'workflow_dispatch'
+    needs:
+    - build-test
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Download artifact - API
+      uses: actions/download-artifact@v3
+      with:
+        name: apiapp
+        path: published/apiapp
+
+    - name: Login to Azure
+      uses: azure/login@v1
+      with:
+        client-id: ${{ vars.AZURE_CLIENT_ID }}
+        tenant-id: ${{ vars.AZURE_TENANT_ID }}
+        subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+    - name: Deploy Azure -  API
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: '${{ env.AZURE_FNCAPP_NAME }}-aoai'
+        package: published/apiapp
+
+    # - name: Get SWA token
+    #   shell: bash
+    #   run: |
+    #     swa_token=$(az staticwebapp secrets list \
+    #     -g ${{ env.AZURE_RESOURCE_GROUP_NAME }} \
+    #     -n ${{ env.AZURE_STTAPP_NAME }}-web \
+    #     --query "properties.apiKey" -o tsv)
+
+    #     echo "::add-mask::$swa_token"
+    #     echo "SWA_TOKEN=$swa_token" >> $GITHUB_ENV
+
+    # - name: Deploy Azure - Web
+    #   uses: Azure/static-web-apps-deploy@v1
+    #   with:
+    #     azure_static_web_apps_api_token: ${{ env.SWA_TOKEN }}
+    #     action: "upload"
+    #     app_location: 'src/YouTubeSummariser.WebApp.Wasm'
+    #     api_location: ''
+    #     # api_location: 'src/YouTubeSummariser.ApiApp'
+    #     output_location: 'wwwroot'
+    #     # app_build_command: 'dotnet publish -c Release -o bin'
+    #     # api_build_command: 'dotnet publish -c Release'
+
+    - name: Update APIM settings
+      shell: bash
+      run: |
+        functionKey=$(az functionapp keys list \
+          --resource-group "${{ env.AZURE_RESOURCE_GROUP_NAME }}" \
+          --name "${{ env.AZURE_FNCAPP_NAME }}-aoai" \
+          --query "functionKeys.default" \
+          --output tsv)
+
+        nv=$(az apim nv update \
+          --resource-group ${{ env.AZURE_RESOURCE_GROUP_NAME }} \
+          --service-name ${{ env.AZURE_APIM_NAME }} \
+          --named-value-id "X_FUNCTIONS_KEY_AOAI" \
+          --value $functionKey \
+          --secret true)
+
+    - name: Update API settings - API
+      shell: bash
+      run: |
+        endpoint=$(az cognitiveservices account show \
+          --resource-group "${{ env.AZURE_RESOURCE_GROUP_NAME }}" \
+          --name "${{ env.AZURE_OPENAI_NAME }}" \
+          --query "properties.endpoint" -o tsv)
+
+        apikey=$(az cognitiveservices account keys list \
+          --resource-group "${{ env.AZURE_RESOURCE_GROUP_NAME }}" \
+          --name "${{ env.AZURE_OPENAI_NAME }}" \
+          --query "key1" -o tsv)
+
+        appsettings=$(az functionapp config appsettings set \
+          --resource-group "${{ env.AZURE_RESOURCE_GROUP_NAME }}" \
+          --name "${{ env.AZURE_FNCAPP_NAME }}-aoai" \
+          --settings "OpenAI__Endpoint=$endpoint")
+
+        appsettings=$(az functionapp config appsettings set \
+          --resource-group "${{ env.AZURE_RESOURCE_GROUP_NAME }}" \
+          --name "${{ env.AZURE_FNCAPP_NAME }}-aoai" \
+          --settings "OpenAI__ApiKey=$apikey")

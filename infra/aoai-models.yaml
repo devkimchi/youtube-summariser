@@ -3,3 +3,8 @@
   version: '0613'
   skuName: 'Standard'
   skuCapacity: 16
+# - name: 'gpt-4-32k'
+#   deploymentName: 'model-gpt432k'
+#   version: '0613'
+#   skuName: 'Standard'
+#   skuCapacity: 10

@@ -9,21 +9,31 @@ This provides sample Blazor apps that summarise a YouTube video transcript to a 
 - [Azure Subscription](https://azure.microsoft.com/free?WT.mc_id=dotnet-96932-juyoo)
 - [Azure OpenAI Service](https://learn.microsoft.com/azure/ai-services/openai/overview?WT.mc_id=dotnet-96932-juyoo)
 
+## Known Issues
+
+- If your YouTube video is long enough, you might exceed the maximum number of tokens that Azure OpenAI Service can handle. For more information, see [Model summary](https://learn.microsoft.com/azure/ai-services/openai/concepts/models?WT.mc_id=dotnet-96932-juyoo#model-summary-table-and-region-availability).
+  - `gpt-35-turbo`: 4K
+  - `gpt-35-turbo-16k`: 16K
+  - `gpt-4`: 4K
+  - `gpt-4-32K`: 32K
+
 ## Getting Started
 
-### Provision Azure OpenAI Service
+### Provision Resources to Azure
 
 1. Fork this repository to your GitHub account, `{{GITHUB_USERNAME}}`.
 1. Run the commands below to set up a resource names:
 
    ```bash
    # PowerShell
-   $AZURE_ENV_NAME="assistant$(Get-Random -Min 1000 -Max 9999)"
+   $AZURE_ENV_NAME="summariser$(Get-Random -Min 1000 -Max 9999)"
    $GITHUB_USERNAME="{{GITHUB_USERNAME}}"
+   $GITHUB_REPOSITORY_NAME="{{GITHUB_REPOSITORY_NAME}}"
 
    # Bash
-   AZURE_ENV_NAME="assistant$RANDOM"
+   AZURE_ENV_NAME="summariser$RANDOM"
    GITHUB_USERNAME="{{GITHUB_USERNAME}}"
+   GITHUB_REPOSITORY_NAME="{{GITHUB_REPOSITORY_NAME}}"
    ```
 
 1. Run the commands below to provision Azure resources:
@@ -33,6 +43,8 @@ This provides sample Blazor apps that summarise a YouTube video transcript to a 
    azd init -e $AZURE_ENV_NAME
    azd up
    ```
+
+   > **Note:** You may be asked to enter your GitHub username/orgname and repository name where your forked repository is located.
 
 1. Get the endpoint, API key and deployment ID.
 
@@ -70,7 +82,18 @@ This provides sample Blazor apps that summarise a YouTube video transcript to a 
                           --query "[0].name" -o tsv)
    ```
 
-### Deprovision Azure OpenAI Service
+### Deploy Applications to Azure
+
+1. Run the commands below to deploy apps to Azure:
+
+   ```bash
+   az login
+   gh auth login
+   azd pipeline config
+   gh workflow run "Azure Dev" --repo $GITHUB_USERNAME/$GITHUB_REPOSITORY_NAME
+   ```
+
+### Deprovision Resources from Azure
 
 1. To avoid unexpected billing shock, run the commands below to deprovision Azure resources:
 
