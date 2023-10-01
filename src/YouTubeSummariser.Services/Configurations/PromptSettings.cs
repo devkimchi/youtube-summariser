@@ -1,4 +1,4 @@
-namespace YouTubeSummariser.ApiApp.Configurations;
+namespace YouTubeSummariser.Services.Configurations;
 
 /// <summary>
 /// This represents the settings entity for the prompt.

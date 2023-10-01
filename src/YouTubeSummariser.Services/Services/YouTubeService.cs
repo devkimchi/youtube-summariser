@@ -1,6 +1,6 @@
 using Aliencube.YouTubeSubtitlesExtractor.Abstractions;
 
-namespace YouTubeSummariser.ApiApp.Services;
+namespace YouTubeSummariser.Services;
 
 /// <summary>
 /// This provides interfaces to the <see cref="YouTubeService"/> class.
@@ -38,6 +38,11 @@ public class YouTubeService : IYouTubeService
         var subtitle = await this._youtube
                                  .ExtractSubtitleAsync(videoUrl, languageCode)
                                  .ConfigureAwait(false);
+        if (subtitle == null)
+        {
+            return string.Empty;
+        }
+
         var transcript = subtitle.Content
                                  .Select(p => p.Text)
                                  .Aggregate((a, b) => $"{a}\n{b}");

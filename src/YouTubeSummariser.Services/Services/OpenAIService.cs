@@ -1,8 +1,8 @@
 using Azure.AI.OpenAI;
 
-using YouTubeSummariser.ApiApp.Configurations;
+using YouTubeSummariser.Services.Configurations;
 
-namespace YouTubeSummariser.ApiApp.Services;
+namespace YouTubeSummariser.Services;
 
 /// <summary>
 /// This provides interfaces to the <see cref="OpenAIService"/> class.

@@ -8,8 +8,8 @@ using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 
-using YouTubeSummariser.ApiApp.Models;
-using YouTubeSummariser.ApiApp.Services;
+using YouTubeSummariser.Services;
+using YouTubeSummariser.Services.Models;
 
 namespace YouTubeSummariser.ApiApp.Triggers;
 
@@ -78,11 +78,21 @@ public class SummariseHttpTrigger
 
         try
         {
-            var transcript = await this._youtube.GetTranscriptAsync(payload.VideoUrl, payload.VideoLanguageCode);
-            var completion = await this._openai.GetCompletionsAsync(transcript, payload.SummaryLanguageCode);
-
             response = req.CreateResponse(HttpStatusCode.OK);
             response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
+
+            var transcript = await this._youtube.GetTranscriptAsync(payload.VideoUrl, payload.VideoLanguageCode);
+            if (string.IsNullOrWhiteSpace(transcript) == true)
+            {
+                var message = "The given YouTube video doesn't provide transcripts.";
+                this._logger.LogInformation(message);
+
+                await response.WriteStringAsync(message);
+
+                return response;
+            }
+
+            var completion = await this._openai.GetCompletionsAsync(transcript, payload.SummaryLanguageCode);
 
             await response.WriteStringAsync(completion);
 

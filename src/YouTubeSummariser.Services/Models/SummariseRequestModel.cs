@@ -1,4 +1,4 @@
-namespace YouTubeSummariser.ApiApp.Models;
+namespace YouTubeSummariser.Services.Models;
 
 /// <summary>
 /// This represents the request model entity containing YouTube video details.
