@@ -1,0 +1,101 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "YouTube Summariser",
+    "version": "1.0",
+    "description": "This is a set of APIs that summarises YouTube video content.",
+    "license": {
+      "name": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "apim-{{AZURE_ENV_NAME}}.azure-api.net",
+  "basePath": "/aoai",
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "apiKeyHeader": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    },
+    "apiKeyQuery": {
+      "type": "apiKey",
+      "name": "subscription-key",
+      "in": "query"
+    }
+  },
+  "security": [
+    {
+      "apiKeyHeader": []
+    },
+    {
+      "apiKeyQuery": []
+    }
+  ],
+  "paths": {
+    "/summarise": {
+      "post": {
+        "description": "This gets the summary from a YouTube video.",
+        "operationId": "summarise",
+        "summary": "Gets the summary from YouTube video",
+        "tags": [
+          "summary"
+        ],
+        "parameters": [
+          {
+            "name": "summariseRequestModel",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/summariseRequestModel"
+            },
+            "description": "The YouTube video information."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "text/plain"
+        ],
+        "responses": {
+          "200": {
+            "description": "Payload of String",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "400": {
+            "description": "This indicates the request is invalid."
+          },
+          "500": {
+            "description": "This indicates the server is not working as expected."
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "summariseRequestModel": {
+      "type": "object",
+      "properties": {
+        "videoUrl": {
+          "type": "string"
+        },
+        "videoLanguageCode": {
+          "type": "string"
+        },
+        "summaryLanguageCode": {
+          "type": "string"
+        }
+      },
+      "example": {
+        "videoUrl": "string",
+        "videoLanguageCode": "string",
+        "summaryLanguageCode": "string"
+      }
+    }
+  },
+  "tags": []
+}
