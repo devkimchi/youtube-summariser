@@ -1,0 +1,65 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "GitHub AuthN APIs",
+        "version": "1.0",
+        "description": "This is a set of APIs that deals with GitHub authN APIs.",
+        "license": {
+            "name": "MIT",
+            "url": "http://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "apim-{{AZURE_ENV_NAME}}.azure-api.net",
+    "basePath": "/github",
+    "schemes": [
+        "https"
+    ],
+    "securityDefinitions": {
+        "apiKeyHeader": {
+            "type": "apiKey",
+            "name": "Ocp-Apim-Subscription-Key",
+            "in": "header"
+        },
+        "apiKeyQuery": {
+            "type": "apiKey",
+            "name": "subscription-key",
+            "in": "query"
+        }
+    },
+    "security": [
+        {
+            "apiKeyHeader": []
+        },
+        {
+            "apiKeyQuery": []
+        }
+    ],
+    "paths": {
+        "/access-token": {
+            "post": {
+                "description": "This gets the OAuth access token for GitHub API.",
+                "operationId": "getAccessToken",
+                "summary": "Gets the GitHub OAuth access token",
+                "tags": [
+                    "auth"
+                ],
+                "produces": [
+                    "text/plain"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "This returns the completion generated from the OpenAI API.",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "text/plain": "WW91VHViZSBTZXJpYWxpc2Vy"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {},
+    "tags": []
+}
