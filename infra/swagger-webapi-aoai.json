@@ -1,0 +1,94 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Local Debugging",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/summarise": {
+      "post": {
+        "tags": [
+          "Summarise"
+        ],
+        "operationId": "summarise",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/SummariseRequestModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ProblemDetails": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "status": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "detail": {
+          "type": "string"
+        },
+        "instance": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "SummariseRequestModel": {
+      "type": "object",
+      "properties": {
+        "videoUrl": {
+          "type": "string"
+        },
+        "videoLanguageCode": {
+          "type": "string"
+        },
+        "summaryLanguageCode": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "host": "localhost:5001",
+  "schemes": [
+    "https"
+  ]
+}
