@@ -61,6 +61,32 @@ var apps = [
       operations: []
     }
   }
+  {
+    name: 'github'
+    isFunctionApp: false
+    functionAppSuffix: 'github'
+    appSettings: {}
+    apimIntegrated: true
+    api: {
+      name: 'GITHUB'
+      path: 'github'
+      serviceUrl: 'https://api.github.com'
+      referenceUrl: 'https://raw.githubusercontent.com/${gitHubUsername}/${gitHubRepositoryName}/${gitHubBranchName}/infra/openapi-{{SUFFIX}}.{{EXTENSION}}'
+      format: 'openapi-link'
+      extension: 'yaml'
+      subscription: true
+      product: 'default'
+      operations: [
+        {
+          name: 'GetAccessToken'
+          policy: {
+            format: 'xml-link'
+            value: 'https://raw.githubusercontent.com/${gitHubUsername}/${gitHubRepositoryName}/${gitHubBranchName}/infra/apim-policy-github-operation-getaccesstoken.xml'
+          }
+        }
+      ]
+    }
+  }
 ]
 
 module apim './provision-ApiManagement.bicep' = {

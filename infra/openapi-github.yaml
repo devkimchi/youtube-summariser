@@ -1,0 +1,30 @@
+openapi: 3.0.1
+info:
+  title: GitHub Auth API
+  description: This is a set of APIs that deals with GitHub authN APIs.
+  license:
+    name: MIT
+    url: http://opensource.org/licenses/MIT
+  version: 1.0.0
+servers:
+  - url: http://localhost:7071/api
+paths:
+  /access-token:
+    post:
+      tags:
+        - auth
+      summary: Gets the GitHub OAuth access token
+      description: This gets the OAuth access token for GitHub API.
+      operationId: getAccessToken
+      responses:
+        '200':
+          description: This returns the completion generated from the OpenAI API.
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                access-token:
+                  value: "WW91VHViZSBTZXJpYWxpc2Vy"
+          x-ms-summary: The access token generated from GitHub.
+      x-ms-visibility: important

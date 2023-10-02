@@ -1,0 +1,18 @@
+<policies>
+  <inbound>
+    <base />
+    <get-authorization-context provider-id="github" authorization-id="github" context-variable-name="auth-context" identity-type="managed" ignore-error="false" />
+    <return-response>
+      <set-body>@(((Authorization)context.Variables.GetValueOrDefault("auth-context"))?.AccessToken)</set-body>
+    </return-response>
+  </inbound>
+  <backend>
+    <base />
+  </backend>
+  <outbound>
+    <base />
+  </outbound>
+  <on-error>
+    <base />
+  </on-error>
+</policies>
