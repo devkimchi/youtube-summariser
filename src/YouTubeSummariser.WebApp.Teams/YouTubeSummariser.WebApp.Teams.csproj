@@ -22,4 +22,8 @@
     <PackageReference Include="Microsoft.TeamsFx" Version="2.1.*" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\YouTubeSummariser.Components2\YouTubeSummariser.Components2.csproj" />
+  </ItemGroup>
+
 </Project>

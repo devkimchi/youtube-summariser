@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+
+    <AssemblyName>YouTubeSummariser.Components</AssemblyName>
+    <RootNamespace>YouTubeSummariser.Components</RootNamespace>
+
+    <JsInteropRoot>JsInterop/</JsInteropRoot>
+    <DefaultItemExcludes>$(DefaultItemExcludes);$(JsInteropRoot)node_modules/**</DefaultItemExcludes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.22" />
+    <PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="7.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="NSwag.ApiDescription.Client" Version="13.20.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <OpenApiReference Include="OpenAPIs\v3.yaml" CodeGenerator="NSwagCSharp" Namespace="YouTubeSummariser.Components.Facade" ClassName="YouTubeSummariserClient">
+      <SourceUri>http://localhost:7071/api/openapi/v3.yaml</SourceUri>
+    </OpenApiReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="$(JsInteropRoot)**" />
+    <None Remove="$(JsInteropRoot)**" />
+    <None Include="$(JsInteropRoot)**" Exclude="$(JsInteropRoot)node_modules/**" />
+  </ItemGroup>
+
+  <Target Name="PublishRunWebpack" AfterTargets="Build">
+    <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
+    <Exec WorkingDirectory="$(JsInteropRoot)" Command="npm install" />
+    <Exec WorkingDirectory="$(JsInteropRoot)" Command="npm run build" />
+  </Target>
+
+</Project>

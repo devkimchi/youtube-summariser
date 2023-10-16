@@ -1,3 +1,5 @@
+using YouTubeSummariser.Components;
+using YouTubeSummariser.Components.Facade;
 using YouTubeSummariser.WebApp.Teams;
 using YouTubeSummariser.WebApp.Teams.Interop.TeamsSDK;
 
@@ -13,6 +15,22 @@ builder.Services.AddScoped<MicrosoftTeams>();
 builder.Services.AddControllers();
 builder.Services.AddHttpClient("WebClient", client => client.Timeout = TimeSpan.FromSeconds(600));
 builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddScoped(sp =>
+{
+    var http = sp.GetService<HttpClient>();
+    var facade = new YouTubeSummariserClient(http) { ReadResponseAsString = true };
+    if (!builder.Environment.IsDevelopment())
+    {
+        var accessor = sp.GetService<IHttpContextAccessor>();
+        var baseUrl = $"{accessor.HttpContext.Request.BaseUrl().TrimEnd('/')}/api";
+        facade.BaseUrl = baseUrl;
+    }
+
+    return facade;
+});
+
+//builder.Services.AddScoped<IProgressBarJsInterop, ProgressBarJsInterop>();
 
 var app = builder.Build();
 
