@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
+
     <RuntimeFrameworkVersion>6.0.10</RuntimeFrameworkVersion>
   </PropertyGroup>
 
@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\YouTubeSummariser.Components2\YouTubeSummariser.Components2.csproj" />
+    <ProjectReference Include="..\YouTubeSummariser.Components\YouTubeSummariser.Components.csproj" />
   </ItemGroup>
 
 </Project>

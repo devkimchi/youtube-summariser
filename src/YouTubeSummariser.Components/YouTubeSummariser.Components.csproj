@@ -1,6 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <!--<TargetFramework>net7.0</TargetFramework>-->
+    <!--<TargetFrameworks>net6.0;net7.0</TargetFrameworks>-->
+
     <AssemblyName>YouTubeSummariser.Components</AssemblyName>
     <RootNamespace>YouTubeSummariser.Components</RootNamespace>
 
@@ -12,23 +16,16 @@
     <SupportedPlatform Include="browser" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.11" />
-    <PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="7.0.11">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="NSwag.ApiDescription.Client" Version="13.20.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.23" />
   </ItemGroup>
 
+  <!--<ItemGroup Condition="'$(TargetFramework)' == 'net7.0'">
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.12" />
+  </ItemGroup>-->
+
   <ItemGroup>
-    <OpenApiReference Include="OpenAPIs\v3.yaml" CodeGenerator="NSwagCSharp" Namespace="YouTubeSummariser.Components.Facade" ClassName="YouTubeSummariserClient">
-      <SourceUri>http://localhost:7071/api/openapi/v3.yaml</SourceUri>
-    </OpenApiReference>
+    <ProjectReference Include="..\YouTubeSummariser.Components.Facade\YouTubeSummariser.Components.Facade.csproj" />
   </ItemGroup>
 
   <ItemGroup>

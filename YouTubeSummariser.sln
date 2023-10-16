@@ -13,11 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YouTubeSummariser.Services"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YouTubeSummariser.Components", "src\YouTubeSummariser.Components\YouTubeSummariser.Components.csproj", "{8F0B64D6-E1A2-487F-8978-AA91A2732AF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YouTubeSummariser.Components2", "src\YouTubeSummariser.Components2\YouTubeSummariser.Components2.csproj", "{43651591-F6BB-4401-B3D2-6AA1D8017BD8}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YouTubeSummariser.WebApp.Wasm", "src\YouTubeSummariser.WebApp.Wasm\YouTubeSummariser.WebApp.Wasm.csproj", "{BA0E2490-C014-4325-85C3-5132FEBE1844}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YouTubeSummariser.WebApp.Teams", "src\YouTubeSummariser.WebApp.Teams\YouTubeSummariser.WebApp.Teams.csproj", "{277E49A0-CB06-427A-8066-9A8456310673}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YouTubeSummariser.Components.Facade", "src\YouTubeSummariser.Components.Facade\YouTubeSummariser.Components.Facade.csproj", "{7767F63C-E137-4469-9D90-63BEB45889FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +41,6 @@ Global
 		{8F0B64D6-E1A2-487F-8978-AA91A2732AF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F0B64D6-E1A2-487F-8978-AA91A2732AF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F0B64D6-E1A2-487F-8978-AA91A2732AF3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{43651591-F6BB-4401-B3D2-6AA1D8017BD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{43651591-F6BB-4401-B3D2-6AA1D8017BD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{43651591-F6BB-4401-B3D2-6AA1D8017BD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{43651591-F6BB-4401-B3D2-6AA1D8017BD8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BA0E2490-C014-4325-85C3-5132FEBE1844}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BA0E2490-C014-4325-85C3-5132FEBE1844}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA0E2490-C014-4325-85C3-5132FEBE1844}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -55,6 +51,10 @@ Global
 		{277E49A0-CB06-427A-8066-9A8456310673}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{277E49A0-CB06-427A-8066-9A8456310673}.Release|Any CPU.Build.0 = Release|Any CPU
 		{277E49A0-CB06-427A-8066-9A8456310673}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{7767F63C-E137-4469-9D90-63BEB45889FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7767F63C-E137-4469-9D90-63BEB45889FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7767F63C-E137-4469-9D90-63BEB45889FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7767F63C-E137-4469-9D90-63BEB45889FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,9 +64,9 @@ Global
 		{CEB81668-3BE6-4BBC-BA78-7AD7F64F80C6} = {F0754B28-F0B2-414C-83DB-06854DBF508E}
 		{47F2E24C-23E7-4E07-B52A-7A33C5165645} = {F0754B28-F0B2-414C-83DB-06854DBF508E}
 		{8F0B64D6-E1A2-487F-8978-AA91A2732AF3} = {F0754B28-F0B2-414C-83DB-06854DBF508E}
-		{43651591-F6BB-4401-B3D2-6AA1D8017BD8} = {F0754B28-F0B2-414C-83DB-06854DBF508E}
 		{BA0E2490-C014-4325-85C3-5132FEBE1844} = {F0754B28-F0B2-414C-83DB-06854DBF508E}
 		{277E49A0-CB06-427A-8066-9A8456310673} = {F0754B28-F0B2-414C-83DB-06854DBF508E}
+		{7767F63C-E137-4469-9D90-63BEB45889FB} = {F0754B28-F0B2-414C-83DB-06854DBF508E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3E8AEBE9-75D2-45E8-8795-38BB5E81FEFD}

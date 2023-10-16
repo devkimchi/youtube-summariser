@@ -21,7 +21,9 @@
                 <label for="summary-language-code" class="form-label"><strong>Summary Language</strong></label>
                 <select class="form-select" id="summary-language-code" aria-label="Summary language code" @bind="SummaryLanguageCode">
                     <option value="en" selected>English</option>
+                    <option value="ja">Japanese</option>
                     <option value="ko">Korean</option>
+                    <option value="ms">Malay</option>
                 </select>
             </div>
         </div>
@@ -34,11 +36,11 @@
         </div>
     </div>
 
-    <div class="row">
+    @* <div class="row">
         <div class="mb-3">
             <div id="progressBar" hidden="@SummaryCompleted"></div>
         </div>
-    </div>
+    </div> *@
 
     <div class="row">
         <div class="mb-3">
