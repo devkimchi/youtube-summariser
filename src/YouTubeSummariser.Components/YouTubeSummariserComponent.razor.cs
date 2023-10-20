@@ -58,7 +58,7 @@ public partial class YouTubeSummariserComponent : ComponentBase
 
         this.Summary = default;
         this.SummaryCompleted = false;
-        // await this.JSR.InvokeVoidAsync("YouTube.RenderProgressBar");
+        await this.JSR.InvokeVoidAsync("YouTube.RenderProgressBar");
         //await this.ProgressBar.RenderAsync();
 
         var request = new SummariseRequestModel
