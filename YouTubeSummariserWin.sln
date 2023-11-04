@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F0754B28-F0B2-414C-83DB-06854DBF508E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YouTubeSummariser.ApiApp", "src\YouTubeSummariser.ApiApp\YouTubeSummariser.ApiApp.csproj", "{D2B6ACCD-125F-4AB8-B072-0F3C104AEBB2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YouTubeSummariser.Services", "src\YouTubeSummariser.Services\YouTubeSummariser.Services.csproj", "{47F2E24C-23E7-4E07-B52A-7A33C5165645}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YouTubeSummariser.Components", "src\YouTubeSummariser.Components\YouTubeSummariser.Components.csproj", "{8F0B64D6-E1A2-487F-8978-AA91A2732AF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YouTubeSummariser.WebApp", "src\YouTubeSummariser.WebApp\YouTubeSummariser.WebApp.csproj", "{F061D611-EE85-4D31-9289-EF5850FF5F14}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D2B6ACCD-125F-4AB8-B072-0F3C104AEBB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2B6ACCD-125F-4AB8-B072-0F3C104AEBB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2B6ACCD-125F-4AB8-B072-0F3C104AEBB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2B6ACCD-125F-4AB8-B072-0F3C104AEBB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47F2E24C-23E7-4E07-B52A-7A33C5165645}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47F2E24C-23E7-4E07-B52A-7A33C5165645}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47F2E24C-23E7-4E07-B52A-7A33C5165645}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47F2E24C-23E7-4E07-B52A-7A33C5165645}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F0B64D6-E1A2-487F-8978-AA91A2732AF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F0B64D6-E1A2-487F-8978-AA91A2732AF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F0B64D6-E1A2-487F-8978-AA91A2732AF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F0B64D6-E1A2-487F-8978-AA91A2732AF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F061D611-EE85-4D31-9289-EF5850FF5F14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F061D611-EE85-4D31-9289-EF5850FF5F14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F061D611-EE85-4D31-9289-EF5850FF5F14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F061D611-EE85-4D31-9289-EF5850FF5F14}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D2B6ACCD-125F-4AB8-B072-0F3C104AEBB2} = {F0754B28-F0B2-414C-83DB-06854DBF508E}
+		{47F2E24C-23E7-4E07-B52A-7A33C5165645} = {F0754B28-F0B2-414C-83DB-06854DBF508E}
+		{8F0B64D6-E1A2-487F-8978-AA91A2732AF3} = {F0754B28-F0B2-414C-83DB-06854DBF508E}
+		{F061D611-EE85-4D31-9289-EF5850FF5F14} = {F0754B28-F0B2-414C-83DB-06854DBF508E}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3E8AEBE9-75D2-45E8-8795-38BB5E81FEFD}
+	EndGlobalSection
+EndGlobal
