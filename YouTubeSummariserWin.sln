@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YouTubeSummariser.Component
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YouTubeSummariser.WebApp", "src\YouTubeSummariser.WebApp\YouTubeSummariser.WebApp.csproj", "{F061D611-EE85-4D31-9289-EF5850FF5F14}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YouTubeSummariser.WebForm", "src\YouTubeSummariser.WebForm\YouTubeSummariser.WebForm.csproj", "{A8EADA01-C09A-45E4-993E-B33A3339786D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{F061D611-EE85-4D31-9289-EF5850FF5F14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F061D611-EE85-4D31-9289-EF5850FF5F14}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F061D611-EE85-4D31-9289-EF5850FF5F14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8EADA01-C09A-45E4-993E-B33A3339786D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8EADA01-C09A-45E4-993E-B33A3339786D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8EADA01-C09A-45E4-993E-B33A3339786D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8EADA01-C09A-45E4-993E-B33A3339786D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,6 +50,7 @@ Global
 		{47F2E24C-23E7-4E07-B52A-7A33C5165645} = {F0754B28-F0B2-414C-83DB-06854DBF508E}
 		{8F0B64D6-E1A2-487F-8978-AA91A2732AF3} = {F0754B28-F0B2-414C-83DB-06854DBF508E}
 		{F061D611-EE85-4D31-9289-EF5850FF5F14} = {F0754B28-F0B2-414C-83DB-06854DBF508E}
+		{A8EADA01-C09A-45E4-993E-B33A3339786D} = {F0754B28-F0B2-414C-83DB-06854DBF508E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3E8AEBE9-75D2-45E8-8795-38BB5E81FEFD}
